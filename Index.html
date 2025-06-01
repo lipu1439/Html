@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Verification Page</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .hidden { display: none; }
+    .bot-reply {
+      margin-top: 20px;
+      background: #e0ffe0;
+      padding: 10px;
+      border: 1px solid green;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="box">
+  <h2 id="verify-msg">✅ User verification successful!</h2>
+  <div id="bot-reply" class="bot-reply hidden">🤖 Your verification was successful.</div>
+</div>
+
+<script>
+  setTimeout(() => {
+    document.getElementById('verify-msg').classList.add('hidden');
+    document.getElementById('bot-reply').classList.remove('hidden');
+
+    // Send request to backend to notify Telegram bot
+    fetch('/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: '-1002576051528' })  // Replace with your chat ID
+    });
+  }, 2000);
+</script>
+
+</body>
+</html>
